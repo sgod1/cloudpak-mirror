@@ -1,7 +1,7 @@
 #!/bin/bash -x
 
 source ./case.env
-source ../registry.env
+source ./registry.env
 
 export PATH=./bin:$PATH
 
