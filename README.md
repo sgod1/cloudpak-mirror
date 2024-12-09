@@ -21,4 +21,4 @@ Log into cloud pak repo: (password is ibm entitlement key)<br/>
 Log into your private registry:<br/>
 `podman login my.private.registry -u myuser`
 
-Update `registry.env` file with you private registry and location of your auth file.<br/>
+Update `registry.env` file with your private registry and location of your auth file.<br/>
