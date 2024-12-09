@@ -13,12 +13,12 @@ Update `case.env` `CASE_VERSION` and `CASE_BRANCH` values as needed.<br/>
 
 Run scripts in order from the current directory.<br/>
 
-0* scripts install required cli binaries in the ./bin directory.<br/>
+`0*` scripts install required cli binaries in the `./bin` directory.<br/>
 
 Log into cloud pak repo: (password is ibm entitlement key)<br/>
 `podman login cp.icr.io -u cp`
 
-Login into your private registry:<br/>
+Log into your private registry:<br/>
 `podman login my.private.registry -u myuser`
 
 Update `registry.env` file with you private registry and location of your auth file.<br/>
