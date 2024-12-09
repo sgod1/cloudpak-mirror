@@ -9,7 +9,7 @@
 - Install podman.
 
 *Steps:*<br/>
-Update case.env CASE_VERSION and CASE_BRANCH values if needed.<br/>
+Update `case.env` `CASE_VERSION` and `CASE_BRANCH` values as needed.<br/>
 
 Run scripts in order from the current directory.<br/>
 
@@ -21,4 +21,4 @@ Log into cloud pak repo: (password is ibm entitlement key)<br/>
 Login into your private registry:<br/>
 `podman login my.private.registry -u myuser`
 
-Update registry.env file with you private registry and location of your auth file.<br/>
+Update `registry.env` file with you private registry and location of your auth file.<br/>
