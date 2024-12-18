@@ -17,6 +17,8 @@ wget https://github.com/IBM/ibm-pak/releases/download/${IBMPAK_RELEASE}/${IBMPAK
 mkdir -p ./bin
 tar xvf ./oc-ibm_pak-linux-amd64.tar.gz -C ./bin
 
+cp ./bin/oc-ibm_pak-linux-amd64 ./bin/oc-ibm_pak
+
 chmod 755 ./bin/oc-ibm_pak
 mv ${IBMPAK_ARCHIVE} ./bin
 
