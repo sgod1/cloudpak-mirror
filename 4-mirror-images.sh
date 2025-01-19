@@ -1,6 +1,7 @@
 #!/bin/bash -x
 
 source ${1:-"./case.env"}
+source ${2:-"./registry.env"}
 
 if test "$MIRROR_TOOLS" = "oc-mirror"; then
    ./4-mirror-oc-mirror.sh $1 $2
