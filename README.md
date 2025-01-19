@@ -63,6 +63,5 @@ To mirror cloudpak container images to a file and then upload this file to a pri
 To mirror cloudpak container images directly to private registry:<br/>
 ```
 3-generate-mirror-manifests.sh case.env
-4-mirror-oc-mirror.sh case.env
-4-mirror-oc-mirror.sh case.env 
+4-mirror-images.sh case.env
 ```
