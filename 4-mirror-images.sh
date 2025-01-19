@@ -1,10 +1,14 @@
 #!/bin/bash -x
 
-source ./case.env
-source ../registry.env
+source ${1:-"./case.env"}
 
-export PATH=./bin:$PATH
+if test "$MIRROR_TOOLS" = "oc-mirror"; then
+   ./4-mirror-oc-mirror.sh $1 $2
 
-# you can pass --insecure flag to this command
+elif test "$MIRROR_TOOLS" = "oc-image-mirror"; then
+   ./4-mirror-oc-image-mirror.sh $1 $2
 
-oc image mirror -f $IBMPAK_HOME/.ibm-pak/data/mirror/$CASE_NAME/$CASE_VERSION/images-mapping.txt --filter-by-os '.*' -a $REGISTRY_AUTH_FILE --skip-multiple-scopes --max-per-registry=1
+else
+   echo set MIRROR_TOOLS to oc-mirror or oc-image-mirror
+   exit 1
+fi
