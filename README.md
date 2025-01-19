@@ -8,17 +8,61 @@
 - Install git.
 - Install podman.
 
-*Steps:*<br/>
+Scripts take case.env file as first argument. Make a copy of case file cloudpak / version combination.<br/>
 Update `case.env` `CASE_VERSION` and `CASE_BRANCH` values as needed.<br/>
+Depending on the cloudpak, set `MIRROR_TOOLS` to `oc-mirror` or `oc-image-mirror`.<br/>
 
-Run scripts in order from the current directory.<br/>
+For cloudpak for Business Automation, set `MIRROR_TOOLS=oc-mirror`.<br/>
+For other cloudpaks, consult documentation.<br/>
 
+Update `registry.env` file with private registry location.<br/>
+
+*Steps:*<br/>
 `0*` scripts install required cli binaries in the `./bin` directory.<br/>
+```
+0-1-install-oc.sh
+0-2-install-oc-mirror.sh
+0-3-install-pak-plugin.sh case.env
+0-4-config-ibm-pak.sh case.env
+0-5-ibm-pak-show-config.sh case.env
+```
 
+Authenticate to registries.<br/>
 Log into cloud pak repo: (password is ibm entitlement key)<br/>
 `podman login cp.icr.io -u cp`
 
 Log into your private registry:<br/>
 `podman login my.private.registry -u myuser`
 
-Update `registry.env` file with your private registry and location of your auth file.<br/>
+For Cloud Pak for Business Automation, run:<br/>
+```
+1-clone-cert-kubernetes.sh case.env
+```
+
+Download case files.<br/>
+To download case files for Cloud Pak for Business Automation:<br/>
+```
+2-download-case-files-cp4ba.sh case.env
+```
+To download case files for other cloudpaks:<br/>
+```
+2-download-case-files.sh case.env
+```
+List downloaded cases:<br/>
+```
+2-1-list-downloaded-cases.sh cp4ba/case.env
+```
+
+To mirror cloudpak container images to a file and then upload this file to a private registry:<br/>
+```
+3-generate-mirror-manifests.sh case.env tofile
+4-mirror-oc-mirror.sh case.env tofile
+4-mirror-oc-mirror.sh case.env fromfile
+```
+
+To mirror cloudpak container images directly to private registry:<br/>
+```
+3-generate-mirror-manifests.sh case.env
+4-mirror-oc-mirror.sh case.env
+4-mirror-oc-mirror.sh case.env 
+```
