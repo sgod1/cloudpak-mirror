@@ -50,7 +50,7 @@ To download case files for other cloudpaks:<br/>
 ```
 List downloaded cases:<br/>
 ```
-2-1-list-downloaded-cases.sh cp4ba/case.env
+2-1-list-downloaded-cases.sh case.env
 ```
 
 To mirror cloudpak container images to a file and then upload this file to a private registry:<br/>
