@@ -1,6 +1,6 @@
 #!/bin/bash -x
 
-source ./case.env
+source ${1:-"./case.env"}
 
 export PATH=./bin:$PATH
 
