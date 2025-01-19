@@ -16,4 +16,3 @@ oc ibm-pak generate mirror-manifests $CASE_NAME $TARGET_REGISTRY --version $CASE
 else
 oc ibm-pak generate mirror-manifests $CASE_NAME $TARGET_REGISTRY --version $CASE_VERSION
 fi
-
