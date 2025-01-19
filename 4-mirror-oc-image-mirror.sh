@@ -1,7 +1,16 @@
 #!/bin/bash -x
 
 source ${1:-"./case.env"}
-source ${2:-"./registry.env"}
+source "./registry.env"
+
+if test "$2"="tofile"; then
+echo "oc image mirror to a file not implemented"
+exit 1
+
+elif test="$2"="fromfile"; then
+echo "oc image mirror from a file not implemented"
+exit 1
+fi
 
 export PATH=./bin:$PATH
 
