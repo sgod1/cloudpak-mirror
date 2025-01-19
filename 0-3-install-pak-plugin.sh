@@ -1,9 +1,6 @@
 #!/bin/bash -x
 
-source ./case.env
-
-# https://github.com/IBM/ibm-pak/releases
-export IBMPAK_RELEASE="v1.16.2"
+source ${1:-"./case.env"}
 
 os=`uname -o`
 arch=`uname -m`
