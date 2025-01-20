@@ -53,15 +53,26 @@ List downloaded cases:<br/>
 2-1-list-downloaded-cases.sh case.env
 ```
 
+Generate mirror manifests.<br/>
 To mirror cloudpak container images to a file and then upload this file to a private registry:<br/>
 ```
 3-generate-mirror-manifests.sh case.env tofile
+```
+To mirror cloudpak container images directly to private registry:<br/>
+```
+3-generate-mirror-manifests.sh case.env
+```
+If `MIRROR_TOOLS` is set to `oc-mirror`:<br/>
+Remove channels that you do not want from `${IBMPAK_HOME}/.ibm-pak/data/mirror/${CASE_NAME}/${CASE_VERSION}/image-set-config.yaml`<br/>
+
+Mirror and upload images.<br/>
+To mirror cloudpak container images to a file and then upload this file to a private registry:<br/>
+```
 4-mirror-oc-mirror.sh case.env tofile
 4-mirror-oc-mirror.sh case.env fromfile
 ```
 
 To mirror cloudpak container images directly to private registry:<br/>
 ```
-3-generate-mirror-manifests.sh case.env
 4-mirror-images.sh case.env
 ```
