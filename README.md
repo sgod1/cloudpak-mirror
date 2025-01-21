@@ -69,7 +69,7 @@ Mirror and upload images.<br/>
 To mirror cloudpak container images to a file and then upload this file to a private registry:<br/>
 ```
 4-mirror-oc-mirror.sh case.env tofile
-4-mirror-oc-mirror.sh case.env fromfile
+4-mirror-oc-mirror.sh case.env fromfile [mirror sequence file, default: mirror_seq1_000000.tar]
 ```
 
 To mirror cloudpak container images directly to private registry:<br/>

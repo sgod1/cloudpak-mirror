@@ -10,7 +10,8 @@ if test "$2"="tofile"; then
 file="file://${IBMPAK_HOME}"
 
 elif test "$2"="fromfile"; then
-fromfile="${IBMPAK_HOME}/mirror_seq1_000000.tar"
+seqfile=${3:-"mirror_seq1_000000.tar"}
+fromfile=${IBMPAK_HOME}/${seqfile}
 fi
 
 VER=$CASE_LATEST_VERSION
