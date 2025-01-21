@@ -34,7 +34,7 @@ if test ! -z $fromfile; then
    fi
 
 else
-target=${file:$TARGET_REGISTRY}
+target=${file:-$TARGET_REGISTRY}
 
 # you can pass --insecure flag to this command
 oc mirror --config $IBMPAK_HOME/.ibm-pak/data/mirror/$CASE_NAME/$CASE_VERSION/image-set-config.yaml $target --dest-skip-tls --max-per-registry=6
