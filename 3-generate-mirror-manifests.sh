@@ -4,7 +4,7 @@ source ${1:-"./case.env"}
 source "./registry.env"
 
 if test "$2"="tofile"; then
-filearg="file://${IBMPAK_HOME}
+filearg="file://${IBMPAK_HOME}"
 fi
 
 export PATH=./bin:$PATH
