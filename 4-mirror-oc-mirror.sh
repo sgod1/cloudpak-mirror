@@ -10,15 +10,13 @@ source "./registry.env"
 #
 # second parameter is "tofile" or "fromfile"
 #
-if test ! -z "$2"; then
-   if test "$2" = "tofile"; then
+if test "$2" = "tofile"; then
       file="file://${IBMPAK_HOME}"
 
-   elif test "$2" = "fromfile"; then
+elif test "$2" = "fromfile"; then
       seqfile=${3:-"mirror_seq1_000000.tar"}
       fromfile=${IBMPAK_HOME}/${seqfile}
-   fi
-fi # ! -z $2
+fi
 
 VER=$CASE_LATEST_VERSION
 if test -z $VER; then
