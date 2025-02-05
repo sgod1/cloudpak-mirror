@@ -76,7 +76,7 @@ To mirror cloudpak container images directly to private registry:<br/>
 ```
 4-mirror-images.sh case.env
 ```
-Mirror Fusion Data Foundation.<br/>
+Mirror Fusion Data Foundation images.<br/>
 
 Update `OCP_VERSION` and `OCP_FULL_VERSION` values in `fdf-290.env`.<br/>
 
