@@ -3,7 +3,7 @@
 # case.env [rhcat]
 
 source ${1:-"./fdf.env"}
-source ../registry.env
+source ./registry.env
 
 rhcat=${2:-"norhcat"}
 
