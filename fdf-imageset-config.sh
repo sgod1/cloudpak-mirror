@@ -25,6 +25,10 @@ export OCP_RELEASE_IMAGE="quay.io/${PRODUCT_REPO}/${RELEASE_NAME}:${OCP_FULL_VER
 
 CASE_PATH="${IBMPAK_HOME}/.ibm-pak/data/mirror/${CASE_NAME}/${CASE_VERSION}"
 
+#
+# image set config
+#
+
 echo writing image-set-configuration to "${CASE_PATH}/image-set-config.yaml"
 
 mkdir -p $CASE_PATH
@@ -126,6 +130,9 @@ echo OCP version "$OCP_VERSION" is not supported by this script.
 exit 1
 fi
 
+#
+# image digest mirror set
+#
 echo writing image-digest-mirror-set to "${CASE_PATH}/image-digest-mirror-set.yaml"
 
 cat <<EOF > ${CASE_PATH}/image-digest-mirror-set.yaml
@@ -165,3 +172,40 @@ spec:
     - $TARGET_REGISTRY/lvms4
     source: registry.redhat.io/lvms4
 EOF
+
+#
+# catalog sources
+#
+echo writing isf catalog source to "${CASE_PATH}/isf-catalog-source.yaml"
+
+cat <<EOF > ${CASE_PATH}/isf-catalog-source.yaml
+apiVersion: operators.coreos.com/v1alpha1
+kind: CatalogSource
+metadata:
+  name: isf-catalog
+  namespace: openshift-marketplace
+spec:
+  displayName: ISF Catalog
+  image: ${TARGET_REGISTRY}/cpopen/isf-operator-software-catalog:latest
+  publisher: IBM
+  sourceType: grpc
+  updateStrategy:
+    registryPoll:
+      interval: 30m0s
+EOF
+
+echo writing redhat-operators catalog source to "${CASE_PATH}/redhat-operators-catalog-source.yaml"
+
+cat <<EOF > ${CASE_PATH}/redhat-operators-catalog-source.yaml
+apiVersion: operators.coreos.com/v1alpha1
+kind: CatalogSource
+metadata:
+ name: redhat-operators
+ namespace: openshift-marketplace
+spec:
+ displayName: Red Hat Operators
+ image: ${TARGET_REGISTRY}/redhat/redhat-operator-index:v${OCP_VERSION}
+ publisher: Red Hat
+ sourceType: grpc
+EOF
+
