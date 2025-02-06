@@ -29,7 +29,7 @@ CASE_PATH="${IBMPAK_HOME}/.ibm-pak/data/mirror/${CASE_NAME}/${CASE_VERSION}"
 # image set config
 #
 
-echo writing image-set-configuration to "${CASE_PATH}/image-set-config.yaml"
+echo writing image-set-configuration to... "${CASE_PATH}/image-set-config.yaml"
 
 mkdir -p $CASE_PATH
 
@@ -128,8 +128,7 @@ fi
 #
 # image digest mirror set
 #
-echo writing image-digest-mirror-set to "${CASE_PATH}/image-digest-mirror-set.yaml"
-
+echo writing image-digest-mirror-set to... "${CASE_PATH}/image-digest-mirror-set.yaml"
 cat <<EOF > ${CASE_PATH}/image-digest-mirror-set.yaml
 apiVersion: config.openshift.io/v1
 kind: ImageDigestMirrorSet
@@ -140,85 +139,94 @@ metadata:
 spec:
   imageDigestMirrors:
   - mirrors:
-    - $TARGET_REGISTRY/openshift4
+    - ${TARGET_REGISTRY}/openshift4
     source: registry.redhat.io/openshift4
   - mirrors:
-    - $TARGET_REGISTRY/redhat
+    - ${TARGET_REGISTRY}/redhat
     source: registry.redhat.io/redhat
   - mirrors:
-    - $TARGET_REGISTRY/rhel9
+    - ${TARGET_REGISTRY}/rhel9
     source: registry.redhat.io/rhel9
   - mirrors:
-    - $TARGET_REGISTRY/rhel8
+    - ${TARGET_REGISTRY}/rhel8
     source: registry.redhat.io/rhel8
   - mirrors:
-    - $TARGET_REGISTRY/cp/df
+    - ${TARGET_REGISTRY}/cp/df
     source: cp.icr.io/cp/df
   - mirrors:
-    - $TARGET_REGISTRY/cpopen
+    - ${TARGET_REGISTRY}/cpopen
     source: cp.icr.io/cpopen
   - mirrors:
-    - $TARGET_REGISTRY/cpopen
+    - ${TARGET_REGISTRY}/cpopen
     source: icr.io/cpopen
   - mirrors:
-    - $TARGET_REGISTRY/cp/ibm-ceph
+    - ${TARGET_REGISTRY}/cp/ibm-ceph
     source: cp.icr.io/cp/ibm-ceph
   - mirrors:
-    - $TARGET_REGISTRY/lvms4
+    - ${TARGET_REGISTRY}/lvms4
     source: registry.redhat.io/lvms4
+  - mirrors:
+    - ${TARGET_REGISTRY}/amq-streams
+    source: registry.redhat.io/amq-streams
+  - mirrors:
+    - ${TARGET_REGISTRY}/oadp
+    source: registry.redhat.io/oadp
+  - mirrors:
+    - ${TARGET_REGISTRY}/amq7
+    source: registry.redhat.io/amq7
+  - mirrors:
+    - ${TARGET_REGISTRY}/ubi8
+    source: registry.access.redhat.com/ubi8
+  - mirrors:
+    - ${TARGET_REGISTRY}/rhmtc
+    source: registry.redhat.io/rhmtc
+  - mirrors:
+    - ${TARGET_REGISTRY}/ubi8
+    source: registry.redhat.io/ubi8
 EOF
 
 #
 # catalog sources
 #
-echo writing isf catalog source to "${CASE_PATH}/isf-catalog-source.yaml"
 
-cat <<EOF > ${CASE_PATH}/isf-catalog-source.yaml
+echo writing isf data foundation catalog source to... "${CASE_PATH}/catalogSource-cs-isf-data-foundation-catalog.yaml"
+cat <<EOF > ${CASE_PATH}/catalogSource-cs-isf-data-foundation-catalog.yaml
 apiVersion: operators.coreos.com/v1alpha1
 kind: CatalogSource
 metadata:
-  name: isf-catalog
+  name: cs-isf-data-foundation-catalog
   namespace: openshift-marketplace
 spec:
-  displayName: ISF Catalog
-  image: ${TARGET_REGISTRY}/cpopen/isf-operator-software-catalog:latest
-  publisher: IBM
-  sourceType: grpc
-  updateStrategy:
-    registryPoll:
-      interval: 30m0s
-EOF
-
-echo writing isf data foundation catalog source to "${CASE_PATH}/isf-data-foundation-catalog-source.yaml"
-
-cat <<EOF > ${CASE_PATH}/isf-data-foundation-catalog-source.yaml
-apiVersion: operators.coreos.com/v1alpha1
-kind: CatalogSource
-metadata:
-  name: isf-data-foundation-catalog
-  namespace: openshift-marketplace
-spec:
-  displayName: ISF Catalog
   image: ${TARGET_REGISTRY}/cpopen/isf-data-foundation-catalog:v${OCP_VERSION}
-  publisher: IBM
   sourceType: grpc
-  updateStrategy:
-    registryPoll:
-      interval: 30m0s
 EOF
 
-echo writing redhat-operators catalog source to "${CASE_PATH}/redhat-operators-catalog-source.yaml"
-
-cat <<EOF > ${CASE_PATH}/redhat-operators-catalog-source.yaml
+echo writing redhat operator index catalog source to... "${CASE_PATH}/catalogSource-cs-redhat-operator-index.yaml"
+cat <<EOF > ${CASE_PATH}/catalogSource-cs-redhat-operator-index.yaml
 apiVersion: operators.coreos.com/v1alpha1
 kind: CatalogSource
 metadata:
- name: redhat-operators
- namespace: openshift-marketplace
+  name: cs-redhat-operator-index
+  #name: redhat-operators
+  namespace: openshift-marketplace
 spec:
- displayName: Red Hat Operators
- image: ${TARGET_REGISTRY}/redhat/redhat-operator-index:v${OCP_VERSION}
- publisher: Red Hat
- sourceType: grpc
+  image: ${TARGET_REGISTRY}/redhat/redhat-operator-index:v${OCP_VERSION}
+  sourceType: grpc
 EOF
 
+#echo writing isf catalog source to... "${CASE_PATH}/isf-catalog-source.yaml"
+#cat <<EOF > ${CASE_PATH}/isf-catalog-source.yaml
+#apiVersion: operators.coreos.com/v1alpha1
+#kind: CatalogSource
+#metadata:
+#  name: isf-catalog
+#  namespace: openshift-marketplace
+#spec:
+#  displayName: ISF Catalog
+#  image: ${TARGET_REGISTRY}/cpopen/isf-operator-software-catalog:latest
+#  publisher: IBM
+#  sourceType: grpc
+#  updateStrategy:
+#    registryPoll:
+#      interval: 30m0s
+#EOF
