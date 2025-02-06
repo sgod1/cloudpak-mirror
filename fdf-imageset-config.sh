@@ -33,11 +33,6 @@ echo writing image-set-configuration to "${CASE_PATH}/image-set-config.yaml"
 
 mkdir -p $CASE_PATH
 
-    #- catalog: registry.redhat.io/redhat/redhat-operator-index:v${OCP_VERSION}
-    #  packages:
-    #  - name: "redhat-oadp-operator"
-    #  - name: "amq-streams"
-
 cat <<EOF > ${CASE_PATH}/image-set-config.yaml
 kind: ImageSetConfiguration
 apiVersion: mirror.openshift.io/v1alpha2
@@ -187,6 +182,24 @@ metadata:
 spec:
   displayName: ISF Catalog
   image: ${TARGET_REGISTRY}/cpopen/isf-operator-software-catalog:latest
+  publisher: IBM
+  sourceType: grpc
+  updateStrategy:
+    registryPoll:
+      interval: 30m0s
+EOF
+
+echo writing isf data foundation catalog source to "${CASE_PATH}/isf-data-foundation-catalog-source.yaml"
+
+cat <<EOF > ${CASE_PATH}/isf-data-foundation-catalog-source.yaml
+apiVersion: operators.coreos.com/v1alpha1
+kind: CatalogSource
+metadata:
+  name: isf-data-foundation-catalog
+  namespace: openshift-marketplace
+spec:
+  displayName: ISF Catalog
+  image: ${TARGET_REGISTRY}/cpopen/isf-data-foundation-catalog:v${OCP_VERSION}
   publisher: IBM
   sourceType: grpc
   updateStrategy:
