@@ -34,17 +34,8 @@ Log into cloud pak repo: (password is ibm entitlement key)<br/>
 Log into your private registry:<br/>
 `podman login my.private.registry -u myuser`
 
-For Cloud Pak for Business Automation, run:<br/>
-```
-1-clone-cert-kubernetes.sh case.env
-```
-
 Download case files.<br/>
-To download case files for Cloud Pak for Business Automation:<br/>
-```
-2-download-case-files-cp4ba.sh case.env
-```
-To download case files for other cloudpaks:<br/>
+To download case files:<br/>
 ```
 2-download-case-files.sh case.env
 ```
@@ -74,25 +65,5 @@ To mirror cloudpak container images to a file and then upload this file to a pri
 
 To mirror cloudpak container images directly to private registry:<br/>
 ```
-4-mirror-images.sh case.env
+4-mirror-oc-mirror.sh case.env
 ```
-Mirror Fusion Data Foundation images.<br/>
-
-Depending on the use case, you may need to log into `registry.redhat.io`:<br/>
-```
-podman login registry.redhat.io -u <user> -p <password>
-```
-
-Update `OCP_VERSION` and `OCP_FULL_VERSION` values in `fdf-290.env`.<br/>
-
-Generate `imageset config` and `image digest mirror set`.<br/>
-Pass `rhcat` as second argument if you want to include redhat fusion catalog.<br/>
-```
-fdf-imageset-config.sh ./fdf-290.env [rhcat]
-```
-
-Mirror Fusion Data Foundation images.<br/>
-```
-4-mirror-images.sh ./fdf-290.env
-```
-
