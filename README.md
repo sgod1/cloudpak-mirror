@@ -67,3 +67,24 @@ To mirror cloudpak container images directly to private registry:<br/>
 ```
 4-mirror-oc-mirror.sh case.env
 ```
+
+Mirror Fusion Data Foundation images.<br/>
+
+Depending on the use case, you may need to log into `registry.redhat.io`:<br/>
+```
+podman login registry.redhat.io -u <user> -p <password>
+```
+
+Update `OCP_VERSION` and `OCP_FULL_VERSION` values in `fdf-290.env`.<br/>
+
+Generate `imageset config` and `image digest mirror set`.<br/>
+Pass `rhcat` as second argument if you want to include redhat fusion catalog.<br/>
+```
+fdf-imageset-config.sh ./fdf.env [rhcat]
+```
+
+Mirror Fusion Data Foundation images.<br/>
+```
+4-mirror-images.sh ./fdf.env
+```
+
